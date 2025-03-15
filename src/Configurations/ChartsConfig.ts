@@ -1,0 +1,1 @@
+export const colorConfig = ["#00bcff","#372aac","#9810fa","#59168b","#00d492","#ffba00","#f6339a"]

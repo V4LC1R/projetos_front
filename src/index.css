@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme{
+    --color-wfc-yellow: #FFCE04;
+    --color-wfc-brow: #240E0B;
+    --color-wfc-gray: #615A5A;
+}
