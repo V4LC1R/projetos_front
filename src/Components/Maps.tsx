@@ -189,8 +189,6 @@ const MyComponent: React.FC<MyComponentProps> = ({
         return <></>;
     }
 
-
-
   // Function to handle marker drag end
   const handleDragEnd = (e: google.maps.MapMouseEvent) => {
     if (e.latLng) {

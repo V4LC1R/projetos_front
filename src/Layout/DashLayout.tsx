@@ -12,7 +12,7 @@ export function DashLayout()
             
             <div className=" relative gap-2 grid grid--rows-[130px_1fr] md:grid-rows-1 md:grid-cols-[300px_1fr] w-full h-[95%] px-1 py-2">
 
-                <Sidebar/>
+                <div/>
 
                 <main className="absolute md:relative overflow-hidden h-full bg-white rounded shadow  md: gap-2 w-full">
                     
