@@ -1,4 +1,5 @@
 import { SearchArea } from "@components/Charts/SearchArea";
+import { SearchAreaForm } from "@components/Forms/SearchAreaForm";
 import { Sidebar } from "@components/Sidebar";
 import { TopHeader } from "@components/TopHeader";
 import { Outlet } from "react-router";
@@ -10,11 +11,11 @@ export function DashLayout()
             
             <TopHeader/>
             
-            <div className=" relative gap-2 grid grid--rows-[130px_1fr] md:grid-rows-1 md:grid-cols-[300px_1fr] w-full h-[95%] px-1 py-2">
+            <div className=" relative gap-2 grid grid--rows-[130px_1fr] md:grid-rows-1 md:grid-cols-[500px_1fr] w-full h-[95%] px-1 py-2">
 
-                <div/>
+                <SearchAreaForm/>
 
-                <main className="absolute md:relative overflow-hidden h-full bg-white rounded shadow  md: gap-2 w-full">
+                <main className=" hidden absolute md:relative overflow-hidden h-full bg-white rounded shadow  md: gap-2 w-full">
                     
                     <Outlet/>
                     
