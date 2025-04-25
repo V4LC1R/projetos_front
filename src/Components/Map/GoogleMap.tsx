@@ -178,59 +178,48 @@ interface MyComponentProps {
   setSelectedOption: React.Dispatch<any>;
 }
 
-const MyComponent: React.FC<MyComponentProps> = ({
-  customLocation,
-  setCustomLocation,
-  setSelectedOption
-}) => {
-   const { isLoaded } = useJsApiLoader({ googleMapsApiKey:"AIzaSyA8431Ti3hFrTifFsj93xAVTx7IW0QLlDI" });
-      const [center, setCenter] = useState(initialCenter);
+export function GoogleMaps({customLocation,setCustomLocation,setSelectedOption}:MyComponentProps){
+
+    const { isLoaded } = useJsApiLoader({ googleMapsApiKey:"AIzaSyA8431Ti3hFrTifFsj93xAVTx7IW0QLlDI" });
+    const [center, setCenter] = useState(initialCenter);
     if (!isLoaded) {
         return <></>;
     }
 
-  // Function to handle marker drag end
-  const handleDragEnd = (e: google.maps.MapMouseEvent) => {
-    if (e.latLng) {
-      if (e.latLng) {
-        const lat = e.latLng.lat();
-        const lng = e.latLng.lng();
-        setCenter({ lat, lng });
-        setCustomLocation({ lat, lng });
-        setSelectedOption("");
-      }
-    }
-  };
+    // Function to handle marker drag end
+    const handleDragEnd = (e: google.maps.MapMouseEvent) => {
+        if (e.latLng) {
+            if (e.latLng) {
+                const lat = e.latLng.lat() +9; 
+                const lng = e.latLng.lng() +9 ;
+                setCenter({ lat, lng });
+                setCustomLocation({ lat, lng });
+                setSelectedOption("");
+            }
+        }
+    };
 
-  return (
-    isLoaded && 
-    <>
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={customLocation}
-            zoom={16}
-            options={{colorScheme:"Night",styles:darkMap}}
-            
-        >
-            <Marker
-                visible
-                position={{
-                    lat:customLocation.lat-3,
-                    lng:customLocation.lng-3
+    return(
+        <>
+            <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={customLocation}
+                zoom={16}
+                options={{
+                    styles: darkMap,    
+                    disableDefaultUI: true, // Desabilita a interface padrão do Google Maps
+                    zoomControl: false, // Mantém o controle de zoom
                 }}
-                draggable
-                onDragEnd={handleDragEnd}
-            />
+            >
 
-             <Marker
-                visible
-                position={customLocation}
-                draggable
-                onDragEnd={handleDragEnd}
-            />
-        </GoogleMap>
-    </>
-  );
-};
+                <Marker
+                    visible
+                    position={customLocation}
+                    draggable
+                    onDragEnd={handleDragEnd}
+                />
 
-export default MyComponent;
+            </GoogleMap>
+        </>
+    )
+}

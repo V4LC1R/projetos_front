@@ -1,6 +1,6 @@
 
 import axios from "axios"
-import { getToken, logout } from "./localStorage";
+import { getToken, logout } from "./LocalStorage/auth";
 
 const api = axios.create(
   {

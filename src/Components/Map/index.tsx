@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {setKey,fromLatLng} from "react-geocode";
 import { useUser } from "@context/UserContext";
-import Maps from "@components/Maps";
+import {GoogleMaps} from "./GoogleMap";
 
 interface Address {
   address: string;
@@ -13,7 +13,7 @@ interface CustomLocation {
   lng: number;
 }
 
-export function UserDashboard()
+export function Map()
 {
     const {user} = useUser()
 
@@ -61,8 +61,7 @@ export function UserDashboard()
 
     return (
         <>
-          
-          <Maps
+          <GoogleMaps
               customLocation={customLocation}
               setCustomLocation={setCustomLocation}
               setAddress={setAddress}

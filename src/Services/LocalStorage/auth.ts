@@ -1,4 +1,4 @@
-import { AuthData } from "../@types/App";
+import { AuthData } from "../../@types/App";
 
 //Variaveis de armazenamento
 const TOKEN = "@horaExtraAuthToken";
@@ -25,5 +25,5 @@ export const login = (data:AuthData) => {
 
 export const logout = () => {
   localStorage.removeItem(TOKEN);
-  window.location.reload()
+  window.location.href = "/auth"
 };

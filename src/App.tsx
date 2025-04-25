@@ -1,11 +1,14 @@
 import { UserProvider } from "@context/UserContext"
 import { Router } from "./routes"
+import { InterationProvider } from "@context/InterationContext"
 
 function App() {
 
   return (
     <UserProvider>
-      <Router/>
+      <InterationProvider>
+        <Router/>
+      </InterationProvider>
     </UserProvider>
   )
 }

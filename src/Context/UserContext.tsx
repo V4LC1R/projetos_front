@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { AuthData, SignInData, SignUpData, User,  } from "../@types/App"
 import axios, { AxiosError } from "axios"
-import { getSession, login } from "@services/localStorage"
+import { getSession, login } from "@services/LocalStorage/auth"
 
 interface UserProviderProps {
     children:ReactNode

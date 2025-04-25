@@ -1,7 +1,53 @@
 @import "tailwindcss";
 
+
+
 @theme{
-    --color-wfc-yellow: #FFCE04;
-    --color-wfc-brow: #240E0B;
-    --color-wfc-gray: #615A5A;
+    /* White Colors */
+    --color-he-white-50: #F3F3F5;
+    --color-he-white-100: #F5F5F5;
+    --color-he-white-200: #FFF9F9;
+
+    /* Black Colors */
+    --color-he-black-100: #0000008C;
+    --color-he-black: #000000;
+
+    /* Dark Colors */
+    --color-he-dark-100: #2A2A2F;
+    --color-he-dark: #1B1C24;
+
+    /* Gray Colors */
+    --color-he-gray-50: #BDBFC8;
+    --color-he-gray-100: #A1A2A4;
+    --color-he-gray-200: #9F9FA0;
+    --color-he-gray-400: #7B7D84;
+    --color-he-gray-500: #8F8F90;
+    --color-he-gray-600: #828386;
+    --color-he-gray-700: #6E6F75;
+    --color-he-gray-800: #686A73;
+    --color-he-gray-850: #65666D;
+    --color-he-gray-900: #444651;
+
+    /* Green Colors */
+    --color-he-green-50: #81BF68;
+    --color-he-green-100: #57AA35;
+    --color-he-green-300: #2CAD46;
+    --color-he-green-400: #56C229;
+    --color-he-green-500: #5FDE2A;
+    --color-he-green-600: #4A902D;
+    --color-he-green-700: #489E24;
+    --color-he-green-800: #386641;
+    --color-he-green-900: #517859;
+
+    /* Blue Colors */
+    --color-he-blue-300: #6B66DC;
+    --color-he-blue-500: #3A34C7;
+    --color-he-blue-800: #2E2A9C;
+    --color-he-blue-900: #201E50;
+
+    /* Purple Colors */
+    --color-he-purple-200: #8A85F7;
+    --color-he-purple-300: #8A85FF;
+    --color-he-purple-400: #5953DA;
+    --color-he-purple-500: #5A54F2;
 }
