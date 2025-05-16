@@ -1,6 +1,4 @@
 import { NavLink } from "react-router";
-import LoginImage from "@assets/loginImage.png"
-import { PiCoffeeFill } from "react-icons/pi";
 import { InputCustom } from "@components/Input";
 import { useUser } from "@context/UserContext";
 import { useState } from "react";
@@ -16,8 +14,6 @@ export function SignIn(){
     async function handleSignIn(e:React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault()
 
-        return window.location.href = "/home"
-
         let err = {has:false,message:''}
 
         if(password.length <= 0 || email.length <= 0) {
@@ -27,7 +23,9 @@ export function SignIn(){
             
         setError(()=>err)
 
-        SignIn({email,password
+        SignIn({email,password})
+        .then(()=>{
+            location.href = "/"
         })
         .catch(()=>{
             err = {has:true,message:'Ocorreu um erro no login!'}
@@ -74,7 +72,7 @@ export function SignIn(){
 
                 <div className="mt-4 text-left ">
                     <NavLink 
-                        to="/register" 
+                        to="/auth/register" 
                         className="text-sm text-white transition hover:text-he-green-50 cursor-pointer"
                     >
                         Não tem conta cadastre-se

@@ -8,6 +8,7 @@ export function SignUp(){
         const {SignUp} = useUser()
 
         const [name,setName] = useState<string>('');
+        const [cellphone,setCellphone] = useState<string>('');
         const [email,setEmail] = useState<string>('');
         const [password,setPassword] = useState<string>('');
         const [confirmPassword,setConfirmPassword] = useState<string>('');
@@ -24,11 +25,19 @@ export function SignUp(){
                 
             setError(()=>err)
     
-            SignUp({email,password,name})
-                .catch(()=>{
-                    err = {has:true,message:'Ocorreu um erro no cadastro!'}
-                    return setError(()=>err)
-                }) 
+            SignUp({
+                name,
+                password,
+                email,
+                cellphone
+            })
+            .then(()=>{
+                location.href = "/"
+            })
+            .catch(()=>{
+                err = {has:true,message:'Ocorreu um erro no cadastro!'}
+                return setError(()=>err)
+            }) 
         }
 
     return(
@@ -49,6 +58,14 @@ export function SignUp(){
                     lable="E-mail"
                     className="bg-white p-3 text-gray-900"
                     placeholder="seu@email.com" 
+                />
+                 <InputCustom
+                    value={cellphone}
+                    onChange={e=>setCellphone(e.target.value)}
+                    type="text"
+                    lable="Telefone"
+                    className="bg-white p-3 text-gray-900"
+                    placeholder="00000000000" 
                 />
                 <InputCustom
                     value={password}
@@ -86,7 +103,7 @@ export function SignUp(){
 
                 <div className="mt-4 text-left ">
                     <NavLink 
-                        to="/" 
+                        to="/auth" 
                         className="text-sm  text-white transition hover:text-he-green-50 cursor-pointer"
                     >
                         já tem conta ? Faca o Login!

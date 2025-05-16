@@ -1,40 +1,31 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
-import { AuthData, SignInData, SignUpData, User,  } from "../@types/App"
-import axios, { AxiosError } from "axios"
+import { AxiosError } from "axios"
 import { getSession, login } from "@services/LocalStorage/auth"
+import { AuthResponse, SignInFormRequest, UserFormRequest } from "@services/User"
+import userService from "@services/User/user.service"
 
 interface UserProviderProps {
     children:ReactNode
 }
 
 type UserContextProps = {
-    user:User
-    SignIn(userCredential:SignInData):Promise<void>
-    SignUp(userCredential:SignUpData):Promise<void>
+    user:AuthResponse
+    SignIn(userCredential:SignInFormRequest):Promise<void>
+    SignUp(userCredential:UserFormRequest):Promise<void>
 }
 
 export const UserContext = createContext({} as UserContextProps)
 
 export function UserProvider({children} : UserProviderProps){
 
-    const [user,setUser] = useState<User>({} as User);
+    const [user,setUser] = useState<AuthResponse>({} as AuthResponse);
 
-    async function SignIn(userCredential:SignInData){
+    async function SignIn(userCredential:SignInFormRequest){
         try {
-            const {data} : {data:AuthData} = await axios.post(
-                `${import.meta.env.VITE_API_URL}/auth`,
-                userCredential
-            )
-
-            const {user,} = data
+            const user = await userService.signIn(userCredential)
 
             setUser(()=>user)
-            login(data)
-            
-            window.location.href = user.type == 1 
-                ? '/dashboard' 
-                : '/dashboard/admin'
-
+            login(user)
 
         } catch (error:AxiosError | any) {
             console.log(error)
@@ -44,12 +35,9 @@ export function UserProvider({children} : UserProviderProps){
         }
     }
 
-    async function SignUp(userCredential:SignUpData){
+    async function SignUp(userCredential:UserFormRequest){
         try {
-            await axios.post(
-                `${import.meta.env.VITE_API_URL}/user/register`,
-                userCredential
-            )
+            await userService.signUp(userCredential)
 
             await SignIn(userCredential)
         } catch (error) {
@@ -61,7 +49,7 @@ export function UserProvider({children} : UserProviderProps){
     }
 
     useEffect(()=>{
-       const {user} = getSession()
+       const user = getSession()
        setUser(()=>user)
     },[])
 

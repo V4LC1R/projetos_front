@@ -1,4 +1,4 @@
-import { AuthData } from "../../@types/App";
+import { AuthResponse } from "@services/User";
 
 //Variaveis de armazenamento
 const TOKEN = "@horaExtraAuthToken";
@@ -10,16 +10,16 @@ export function getSession(){
   const session = localStorage.getItem(TOKEN) ?? ''
 
    if(!session)
-    return {} as AuthData
+    return {} as AuthResponse
 
-  return JSON.parse(session) as AuthData
+  return JSON.parse(session) as AuthResponse
 }
 
 export function getToken():string
 {
   return getSession().token
 }
-export const login = (data:AuthData) => {
+export const login = (data:AuthResponse) => {
   localStorage.setItem(TOKEN, JSON.stringify({...data}));
 };
 
