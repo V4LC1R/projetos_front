@@ -10,7 +10,7 @@ export function SearchRow({}:SearchRowProps){
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/area/1");
+        navigate("/app/area/1");
     }
 
     return (

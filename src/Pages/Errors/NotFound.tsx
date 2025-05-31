@@ -16,7 +16,7 @@ export function NotFound(){
                     <h1 className="text-4xl font-bold">Página não encontrada</h1>
                     <p className="text-gray-500">A página que você está procurando não existe.</p>
                </div>
-                <button onClick={() => navigate("/")} className=" hover:bg-he-green-600 transition-all duration-300 flex justify-between items-center gap-2 rounded-full bg-he-green-300 text-white px-1 py-2 cursor-pointer">
+                <button onClick={() => navigate("/app/finder")} className=" hover:bg-he-green-600 transition-all duration-300 flex justify-between items-center gap-2 rounded-full bg-he-green-300 text-white px-1 py-2 cursor-pointer">
                     <IoArrowBackOutline className=" rounded-full bg-white w-7 h-7 flex items-center justify-center text-he-green-400 text-xl"/>
                     Voltar para a página inicial
                 </button>

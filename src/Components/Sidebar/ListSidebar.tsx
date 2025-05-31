@@ -8,12 +8,12 @@ const sidebarItems = [
     {
         icon: AiFillHome,
         label: "Home",
-        url: "/"
+        url: "/finder"
     },
     {
         icon: IoNotifications,
-        label: "Notificações",
-        url: "/notifications"
+        label: "Solicitações",
+        url: "/requests"
     },
     {
         icon: FaMapLocation,
@@ -48,7 +48,7 @@ export function ListSidebar(){
                         key={item.label} 
                         icon={item.icon} 
                         label={item.label} 
-                        url={item.url}
+                        url={'/app'+item.url}
                     />
                 )
             }

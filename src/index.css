@@ -51,3 +51,30 @@
     --color-he-purple-400: #5953DA;
     --color-he-purple-500: #5A54F2;
 }
+
+@layer utilities {
+   
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        padding: 90px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+       
+        /* Área de fundo da barra */
+        border-radius: 9999px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #a0aec0;
+        /* Cor do "ponteiro" */
+        border-radius: 9999px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #718096;
+    }
+}

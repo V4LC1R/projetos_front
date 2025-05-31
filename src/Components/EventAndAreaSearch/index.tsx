@@ -9,8 +9,7 @@ export function EventAndAreaSearch() {
 
   function handleSearch(e:React.MouseEvent){
       e.preventDefault()
-      navigate(`/?search=${params}`)
-      console.log(params)
+      navigate(`/app/finder/?search=${params}`)
   }
   
     return (

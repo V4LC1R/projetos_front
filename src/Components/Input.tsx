@@ -9,7 +9,7 @@ export function InputCustom({lable,className,...props}:InputCustomProps)
     const classInput = `outline-0 rounded ${className}`
 
     return(
-        <div 
+        <div
             className="flex flex-col text-left"
         >
            {
