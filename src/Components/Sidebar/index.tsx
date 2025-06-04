@@ -14,12 +14,6 @@ export function Sidebar(){
     }
 
     const [showSidebar, setShowSidebar] = useState(sideOpen)
-
-    useEffect(() => {
-        setTimeout(() => {
-            setShowSidebar(sideOpen)
-        }, 200)
-    }, [sideOpen])
     
     return(
         <>
@@ -27,7 +21,7 @@ export function Sidebar(){
             <HambugerSidebar/>
             
             <aside
-                className={`z-3 px-1 pb-1 flex flex-col gap-8 h-[100svh] w-[15.5rem] md:w-[13.5rem] bg-white justify-between border-r-[2px] border-he-green-500 transition-transform duration-200 ${sideOpen ? 'translate-x-[0rem]' : 'translate-x-[-18.5rem]'}`}
+                className={`z-3 px-1 pb-1 flex flex-col gap-8 h-[100svh] w-[15.5rem] md:w-[13.5rem] bg-white justify-between border-r-[2px] border-he-green-500 transition-transform duration-300 ${sideOpen ? 'translate-x-[0rem]' : 'translate-x-[-18.5rem]'}`}
             >
                 <HeaderSidebar/>
 
