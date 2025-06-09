@@ -1,7 +1,7 @@
 import { SignIn } from "@pages/Auth/SignIn";
 import { SignUp } from "@pages/Auth/SignUp";
 
-import { FinderPage } from "@pages/Finder";
+import { EventAndAreaSearch } from "@pages/Finder";
 
 import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
@@ -10,6 +10,8 @@ import { AuthLayout } from "./Layout/AuthLayout";
 import { NotFound } from "./Pages/Errors/NotFound";
 import { AreaPage } from "@pages/Area";
 import { NotificationPage } from "@pages/Notifications";
+import { MyAreasPage } from "@pages/Area/MyAreas";
+import { ProfileAreaPage } from "@pages/Area/ProfileArea";
 
 export function Router(){
 
@@ -23,9 +25,11 @@ export function Router(){
                     </Route>
 
                     <Route path="/app" element={ <AppLayout/> }>
-                        <Route index path="/app/finder/:search?" element={<FinderPage/> }/>
+                        <Route index path="/app/finder/:search?" element={<EventAndAreaSearch/> }/>
                         <Route path="/app/area/:id" element={<AreaPage/>}/>
-                        <Route path="/app/requests" element={<NotificationPage/>}/>
+                        <Route path="/app/requests" element={<NotificationPage/>}/>MyAreasPage
+                        <Route path="/app/my-areas" element={<MyAreasPage/>}/>
+                        <Route path="/app/my-area/:id?" element={<ProfileAreaPage/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
 

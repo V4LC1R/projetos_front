@@ -18,7 +18,7 @@ const sidebarItems = [
     {
         icon: FaMapLocation,
         label: "Areas",
-        url: "/areas",
+        url: "/my-areas",
     },
     {
         icon: FaUserGroup,

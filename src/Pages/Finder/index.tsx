@@ -1,27 +1,42 @@
-
-import { useState } from "react";
-
-import { EventAndAreaList } from "@components/EventAndAreaList";
-import { EventAndAreaSearch } from "@components/EventAndAreaSearch";
+import { Page } from "@components/__common/Page";
+import { Filters, List, NoData } from "@components/Finder";
 import { SpinWithMessage } from "@components/Spin/SpinWithMessage";
-import { useSearchParams } from "react-router";
-export function FinderPage()
-{
-   let [searchParams] = useSearchParams();
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+
+
+export function EventAndAreaSearch() {
+  const [dataList,setDataList] = useState([{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}])
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(false);
-  console.log(searchParams.get("search"));
+  const [params,setParams] = useState(searchParams.get('search') || '');
+
   return (
-    <>
-     {/* <EventAndAreaList/> */}
-      { isLoading 
-        ? 
-          <div className=" w-full bg-white md:h-[300px] md:w-[400px] h-[350px] z-2 rounded-tl-[8px] rounded-tr-[8px] md:rounded-[8px] py-1 mt-1 flex flex-col items-center justify-center">
-            <SpinWithMessage message="Procurando"/>
-          </div> 
-        : !!searchParams.get("search") 
-            ? <EventAndAreaList/>
-            : <EventAndAreaSearch/>
+    <Page.Body className="md:h-auto md:w-[450px] w-full py-2 gap-2">
+      <Page.Header  title="Encontre sua Área" hasBack={false}/>
+      <Filters/>
+      {
+
+        !!searchParams.get('search') &&
+          <Page.Main className="overflow-hidden">
+            {
+              isLoading
+                ?(
+                    <SpinWithMessage
+                        message="Procurando"
+                        sizeSpin={54}
+                    />
+                )
+                : dataList.length > 0 
+                    ? <List 
+                      className="md:h-[470px] h-[calc(100svh-12rem)]" 
+                      dataList={dataList}
+                    />
+                    : <NoData/>
+            }
+          </Page.Main>
       }
-    </>
-  )
+    </Page.Body>
+  );
 }

@@ -1,0 +1,50 @@
+import { Form } from "@components/__common/Form";
+import { Page } from "@components/__common/Page";
+import { Row } from "@components/Area/Row";
+import { RequestRow } from "@components/Request/row";
+import { MouseEvent } from "react";
+import { FaPlus, FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router";
+
+export function MyAreasPage(){
+    const navi = useNavigate()
+
+    function handleCreateArea(e:MouseEvent){
+        e.preventDefault()
+        navi('/app/my-area')
+    }
+
+    return(
+        <Page.Body className="py-2 h-[calc(100svh-4rem)]">
+            <Page.Header title="Minhas Areas" />
+            <Page.Main>
+                <form className="flex flex-row w-full items-end gap-1">
+                    <Form.Input
+                        label="Area"
+                        placeholder="Pesquise aqui suas areas"
+                    />
+                    <Form.Button className="w-[46.5px] h-[42.5px]">
+                        <FaSearch/>
+                    </Form.Button>
+                    <Form.Button onClick={handleCreateArea} className="w-[46.5px] h-[42.5px]">
+                        <FaPlus/>
+                    </Form.Button>
+                </form>
+
+                <Page.ScrollY className="h-[calc(100%-5rem)] ">
+                    <Row/>
+                    <Row/>
+                    <Row/>
+                    <Row/>
+                    <Row/>
+                    <Row/>
+                    <Row/>
+                    <Row/>
+                    <Row/>
+
+                    <Row/>
+                </Page.ScrollY>
+            </Page.Main>
+        </Page.Body>
+    )
+}
