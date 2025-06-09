@@ -10,7 +10,7 @@ export function ProfileAreaPage(){
     const {id} = useParams()
 
     return (
-        <Page.Body className="py-2 ">
+        <Page.Body className="py-2">
             <Page.Header title={!id?"Cadastro de area":"Avani"} />
 
            <Page.Main>

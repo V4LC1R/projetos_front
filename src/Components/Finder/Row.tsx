@@ -2,6 +2,7 @@ import { FaClock, FaHandPointDown, FaMap, FaMapMarked, FaMapMarkerAlt, FaMapPin,
 import { FaMoneyBill1 } from "react-icons/fa6";
 import { IoFootball } from "react-icons/io5";
 import { PiCurrencyDollarSimpleFill } from "react-icons/pi";
+import { useNavigate } from "react-router";
 
 
 type RowProps = {
@@ -14,14 +15,20 @@ type RowProps = {
 }
 
 export function Row({}:Partial<RowProps>) {
+
+    const navi = useNavigate()
     // nome da area
     // nome da pessoa
     // data da solicitação
     // status da solicitação
     // periodo da solicitação
 
+    function handleShowArea(id:number){
+        navi(`/app/area/${id}`)
+    }   
+
     return (
-        <div className="w-full h-[85px] flex flex-row border-he-green-100 border-[1px] bg-gray-50 items-center md:items-start justify-between shadow rounded-[4px]">
+        <div onClick={()=>handleShowArea(1)} className=" cursor-pointer w-full h-[85px] flex flex-row border-he-green-100 border-[1px] bg-gray-50 items-center md:items-start justify-between shadow rounded-[4px]">
             <span className="bg-he-green-50 rounded-tl-[3px] rounded-bl-[3px] h-full w-[5px]"></span>
             <div className="w-full h-full flex flex-col px-1 py-2">
                 <header className="w-full h-[14px] text-he-gray-50 flex flex-row font-semibold items-center gap-4 text-[11px]">
