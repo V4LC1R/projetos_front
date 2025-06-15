@@ -1,5 +1,6 @@
 import { Area } from "@services/Area"
 import { Event } from "@services/Event"
+import { AvailabilityStatus } from "@services/Shared/shared.types"
 
 export type User = {
     id: number,
@@ -8,8 +9,9 @@ export type User = {
     cellphone: string
 }
 
-export interface AuthResponse extends Pick<User, "email" | "name"> {
+export interface AuthResponse {
     token: string;
+    user:User
 }
 
 export interface Owner extends User{

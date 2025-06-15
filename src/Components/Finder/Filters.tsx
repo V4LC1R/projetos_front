@@ -53,7 +53,7 @@ export function Filters(){
                     }
                 </div> 
                         
-                <div className={`${ showFilters ? 'border-2 flex-col justify-end h-[90px]' : 'flex-row items-end'} flex gap-1`}>
+                <div className={`${ showFilters ? 'flex-col gap-3 justify-end h-full' : 'flex-row items-end'} flex gap-1`}>
                     <Form.Button type="submit" onClick={handleSearch}><FaSearch/></Form.Button>
                     <Form.Button onClick={handleShowFilters}><FaFilter/></Form.Button>
                 </div>

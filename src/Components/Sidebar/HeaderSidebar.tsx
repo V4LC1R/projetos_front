@@ -1,8 +1,10 @@
 import { useInteration } from "@context/InterationContext";
+import { useUser } from "@context/UserContext";
 import { FaArrowLeft } from "react-icons/fa6";
 
 export function HeaderSidebar(){
-      const {handleSideOpen} = useInteration() 
+    const {handleSideOpen} = useInteration() 
+    const {user} = useUser()
     return(
 
         <header className="flex flex-col gap-4">
@@ -21,7 +23,7 @@ export function HeaderSidebar(){
                     className="place-self-center h-10 w-10 rounded-full overflow-hidden border-[2px] border-he-green-500 flex flex-col justify-center items-center p-[1px]">
                     <img src="https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg" alt="user" className="rounded-full w-full h-full object-cover" />
                 </div>
-                <span className="place-self-center">Jose da silva moura</span>
+                <span className="place-self-left">{user.name}</span>
             </div>
         </header>
     )

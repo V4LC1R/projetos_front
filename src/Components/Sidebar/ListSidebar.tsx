@@ -1,7 +1,6 @@
-import { IoNotifications, IoPieChartSharp } from "react-icons/io5";
+import { IoNotifications } from "react-icons/io5";
 import { ItemSidebar } from "./ItemSidebar";
-import { FaMapLocation, FaUserGroup } from "react-icons/fa6";
-import { RiSettings4Fill } from "react-icons/ri";
+import { FaMapLocation } from "react-icons/fa6";
 import { AiFillHome } from "react-icons/ai";
 
 const sidebarItems = [
@@ -20,21 +19,21 @@ const sidebarItems = [
         label: "Areas",
         url: "/my-areas",
     },
-    {
-        icon: FaUserGroup,
-        label: "Equipes",
-        url: "/teams"
-    },
-    {
-        icon: RiSettings4Fill,
-        label: "Configurações",
-        url: "/settings"
-    },
-    {
-        icon: IoPieChartSharp,
-        label: "Relatórios",
-        url: "/reports"
-    }
+    // {
+    //     icon: FaUserGroup,
+    //     label: "Equipes",
+    //     url: "/teams"
+    // },
+    // {
+    //     icon: RiSettings4Fill,
+    //     label: "Configurações",
+    //     url: "/settings"
+    // },
+    // {
+    //     icon: IoPieChartSharp,
+    //     label: "Relatórios",
+    //     url: "/reports"
+    // }
 ]
 
 

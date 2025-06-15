@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { InputCustom } from "@components/Input";
 import { useUser } from "@context/UserContext";
 import { useState } from "react";
+import { isStrongPassword } from "@services/Format/Regex";
 
 export function SignIn(){
 
@@ -25,7 +26,7 @@ export function SignIn(){
 
         SignIn({email,password})
         .then(()=>{
-            location.href = "/"
+            location.href = "/app/finder"
         })
         .catch(()=>{
             err = {has:true,message:'Ocorreu um erro no login!'}
@@ -72,7 +73,7 @@ export function SignIn(){
 
                 <div className="mt-4 text-left ">
                     <NavLink 
-                        to="/auth/register" 
+                        to="/register" 
                         className="text-sm text-white transition hover:text-he-green-50 cursor-pointer"
                     >
                         Não tem conta cadastre-se

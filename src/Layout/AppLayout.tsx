@@ -1,11 +1,21 @@
 import { Map } from "@components/Map";
 import { Sidebar } from "@components/Sidebar";
 import { useInteration } from "@context/InterationContext";
+import {  isAuthenticated, logout } from "@services/LocalStorage/auth";
+import { useEffect } from "react";
 import { Outlet } from "react-router";
 
 export function AppLayout()
 {
     const {sideOpen} = useInteration()
+
+    useEffect(()=>{
+
+        if(isAuthenticated())
+            return 
+    
+        logout()
+    },[])
 
     return (
 

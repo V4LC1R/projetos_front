@@ -19,11 +19,6 @@ export function Router(){
         <BrowserRouter>
             <Suspense fallback={<></>}>
                 <Routes>
-                    <Route path="/auth" element={<AuthLayout/>}>
-                        <Route path="/auth/register" element={<SignUp/>}/>
-                        <Route index path="/auth" element={<SignIn/>}/>
-                    </Route>
-
                     <Route path="/app" element={ <AppLayout/> }>
                         <Route index path="/app/finder/:search?" element={<EventAndAreaSearch/> }/>
                         <Route path="/app/area/:id" element={<AreaPage/>}/>
@@ -33,7 +28,12 @@ export function Router(){
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
 
-                <Route path="*" element={<NotFound/>}/>
+                    <Route path="*" element={<NotFound/>}/>
+
+                    <Route  path="/" element={<AuthLayout/>}>
+                        <Route path="/register" element={<SignUp/>}/>
+                        <Route index path="/" element={<SignIn/>}/>
+                    </Route>
                 </Routes>
             </Suspense>
         </BrowserRouter>

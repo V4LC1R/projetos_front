@@ -1,3 +1,5 @@
+import { Schedule } from "@services/Schedule/schedule.types";
+
 export enum EventTypeEnum{
     SIMPLE = 1,
     TOURNAMENT = 2,
@@ -5,10 +7,12 @@ export enum EventTypeEnum{
 }
 
 export type Event = {
-    id?:number;
-    areaId:number
+    id:number;
     name:string
+    areaId:number
+    guestId:number
     type:EventTypeEnum
+    schedule:Schedule[]
 }
 
 export interface EventFormRequest extends Pick<Event, "areaId" | "name" > {

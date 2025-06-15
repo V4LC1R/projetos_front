@@ -1,15 +1,17 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { AxiosError } from "axios"
-import { getSession, login } from "@services/LocalStorage/auth"
-import { AuthResponse, SignInFormRequest, UserFormRequest } from "@services/User"
+import { getSession, login, logout } from "@services/LocalStorage/auth"
+import { AuthResponse, SignInFormRequest, User, UserFormRequest } from "@services/User"
 import userService from "@services/User/user.service"
+
 
 interface UserProviderProps {
     children:ReactNode
 }
 
 type UserContextProps = {
-    user:AuthResponse
+    user:User
+    isAuth:boolean
     SignIn(userCredential:SignInFormRequest):Promise<void>
     SignUp(userCredential:UserFormRequest):Promise<void>
 }
@@ -18,14 +20,16 @@ export const UserContext = createContext({} as UserContextProps)
 
 export function UserProvider({children} : UserProviderProps){
 
-    const [user,setUser] = useState<AuthResponse>({} as AuthResponse);
+    const [user,setUser] = useState<User>({} as User);
+    const [isAuth,setIsAuth] = useState(false)
 
     async function SignIn(userCredential:SignInFormRequest){
         try {
-            const user = await userService.signIn(userCredential)
+            const auth = await userService.signIn(userCredential)
 
-            setUser(()=>user)
-            login(user)
+            setUser(()=>auth.user)
+            setIsAuth(()=>true)
+            login(auth)
 
         } catch (error:AxiosError | any) {
             console.log(error)
@@ -49,8 +53,14 @@ export function UserProvider({children} : UserProviderProps){
     }
 
     useEffect(()=>{
-       const user = getSession()
-       setUser(()=>user)
+       const session = getSession()
+
+       console.log('seriao?',session)
+
+        if(!session)
+            return setIsAuth(false)
+
+       setUser(()=>session.user)
     },[])
 
     return(
@@ -59,6 +69,7 @@ export function UserProvider({children} : UserProviderProps){
                 {
                     //state
                     user,
+                    isAuth,
                     //methods
                     SignIn,
                     SignUp

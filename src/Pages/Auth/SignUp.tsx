@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { InputCustom } from "../../Components/Input";
 import { useUser } from "@context/UserContext";
 import { useState } from "react";
+import { formatPhoneLive, isStrongPassword } from "@services/Format/Regex";
 
 export function SignUp(){
 
@@ -22,6 +23,11 @@ export function SignUp(){
                 err = {has:true,message:'Alguma informação esta errada ou faltou, verifique os dados'}
                 return setError(()=>err)
             }
+
+            if(!isStrongPassword(confirmPassword)){
+                err = {has:true,message:"Senha fraca..... coloque : \n numeros, \n caracteres especiais, \nmaiusculas \nminusculas \ne 8 caracteres"}
+                return setError(()=>err)
+            }
                 
             setError(()=>err)
     
@@ -29,7 +35,8 @@ export function SignUp(){
                 name,
                 password,
                 email,
-                cellphone
+                cellphone,
+                
             })
             .then(()=>{
                 location.href = "/"
@@ -61,11 +68,11 @@ export function SignUp(){
                 />
                  <InputCustom
                     value={cellphone}
-                    onChange={e=>setCellphone(e.target.value)}
+                    onChange={e=>setCellphone(formatPhoneLive(e.target.value))}
                     type="text"
                     lable="Telefone"
                     className="bg-white p-3 text-gray-900"
-                    placeholder="00000000000" 
+                    placeholder="(00) 00000-0000" 
                 />
                 <InputCustom
                     value={password}
@@ -103,7 +110,7 @@ export function SignUp(){
 
                 <div className="mt-4 text-left ">
                     <NavLink 
-                        to="/auth" 
+                        to="/" 
                         className="text-sm  text-white transition hover:text-he-green-50 cursor-pointer"
                     >
                         já tem conta ? Faca o Login!

@@ -1,4 +1,4 @@
-import { Event } from "@services/Event"
+import { Schedule } from "@services/Schedule/schedule.types"
 
 export type Address = {
     id:number
@@ -14,21 +14,28 @@ export type Address = {
     longitude: string
 }
 
+export type Category ={
+    id:number
+    name:string
+}
+
 export type Area = {
     id:number
+    name: string;
+    rent: number;
+    createdAt: Date;
+    updatedAt: Date;
     ownerId:number
-    name:string
-    rent:number
-    createdAt:Date
-    updatedAt:Date
     address:Address
-    event?:Event[]
+    schedule:Schedule[]
+    categories:Category[]
 }
 
 export type AreaSearchByPosition = {
     lat:string,
     lng:string,
-    distance:number
+    distance:number,
+    categories:number[]
 }
 
 export interface AreaFormRequest extends Omit<Area, "id" | "createdAt" | "updatedAt" | "ownerId" | "address"> {
