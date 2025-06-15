@@ -32,6 +32,21 @@ const sidebarItems = [
         label: "Eventos",
         url: "/my-events",
     },
+    // {
+    //     icon: FaUserGroup,
+    //     label: "Equipes",
+    //     url: "/teams"
+    // },
+    // {
+    //     icon: RiSettings4Fill,
+    //     label: "Configurações",
+    //     url: "/settings"
+    // },
+    // {
+    //     icon: IoPieChartSharp,
+    //     label: "Relatórios",
+    //     url: "/reports"
+    // }
 ]
 
 

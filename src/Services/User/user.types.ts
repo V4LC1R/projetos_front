@@ -1,5 +1,6 @@
 import { Area } from "@services/Area"
 import { Event } from "@services/Event"
+import { AvailabilityStatus } from "@services/Shared/shared.types"
 
 export type User = {
     id: number,

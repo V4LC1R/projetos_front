@@ -4,6 +4,7 @@ import { Spin } from "@components/Spin";
 import { Area } from "@services/Area";
 import areaService from "@services/Area/area.service";
 import { useEffect, useState } from "react";
+import { ProfileGuest } from "@components/Area/ProfileGuest";
 import { useParams } from "react-router";
 
 export function AreaPage(){

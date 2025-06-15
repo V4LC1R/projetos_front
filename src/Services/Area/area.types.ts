@@ -1,5 +1,4 @@
 import { Schedule } from "@services/Schedule/schedule.types"
-
 export type AreaByPosition = {
     areas_id: number;
     areas_rent: number;
@@ -31,6 +30,11 @@ export type Address = {
     complement: string,
     latitude: string,
     longitude: string
+}
+
+export type Category ={
+    id:number
+    name:string
 }
 
 export type Area = {
