@@ -1,62 +1,55 @@
-import { Page } from "@components/__common/Page";
-import { ProfileAreaGuest } from "@components/Area/ProfileAreaGuest";
-import { Spin } from "@components/Spin";
-import { Area } from "@services/Area";
-import areaService from "@services/Area/area.service";
-import { useEffect, useState } from "react";
+
+import { Page } from "@components/__common/Page";  
 import { ProfileGuest } from "@components/Area/ProfileGuest";
+import { Schedule } from "@components/Area/Schedule";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaMap, FaMapLocationDot } from "react-icons/fa6";
+import { IoSearch } from "react-icons/io5";
 import { useParams } from "react-router";
 
 export function AreaPage(){
     const { id } = useParams();
+    
+    const horariosDisponiveis = [
+        "08:00",
+        "09:00",
+        "10:00",
+        "11:00",
+        "13:00",
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00"
+    ];
 
-    const [area,setArea] = useState<Area | null>(null)
-
-    async function loadArea() {
-        if(!id)
-            return
-
-        const areaProfile = await areaService.show(parseInt(id))
-
-        setArea(()=>areaProfile)
-    }
-
-    useEffect(()=>{
-        loadArea()
-    },[])
     return(
         <Page.Body className="py-2">
-            {
-                !area ?
-                (
-                    <div className="w-full h-full flex flex-col items-center justify-center">
-                        <Spin/>
-                    </div>
-                ):
-                (
-                    <>
+           
                     
-                    <Page.Header title={area?.name}/>
+                    <Page.Header title={""}/>
 
-                        <Page.Main>
-                            <ProfileAreaGuest profile={area ?? {} as Area}/>
-                            <div className="w-full flex flex-row justify-start">
-                                <span>
-                                    Horarios
-                                </span>
-                            </div>
-                            <Page.ScrollY className="gap-2 h-70">
-                            <span className="w-full bg-amber-200 h-30"/>
-                            
-                            </Page.ScrollY>
+            <Page.Main>
+                <ProfileGuest/>
+                
+                <div className="w-full flex flex-row justify-start mb-2">
+                    <span className="text-lg font-semibold">Horários</span>
+                </div>
 
-                        </Page.Main>
-                    </>
+                <Page.ScrollY className="gap-[5px] h-70">
+                    {/* Componentes Schedule existentes */}
 
-                )
-            }
+                    {/* Horários exibidos ao cliente */}
+                    {horariosDisponiveis.map((horario, index) => (
+                        <div 
+                            key={index}
+                            className="p-3 bg-white rounded shadow-sm border border-gray-200"
+                        >
+                            <span className="text-base text-gray-800">Horário: {horario}</span>
+                        </div>
+                    ))}
+                </Page.ScrollY>
+            </Page.Main>
         </Page.Body>
-
-    
-    )
+    );
 }
