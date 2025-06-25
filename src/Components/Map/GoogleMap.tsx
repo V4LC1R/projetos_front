@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -173,48 +173,72 @@ const initialCenter = { lat:  -22.245053, lng: -54.822179 };
 // const libraries = ["places"]; // Add this
 interface MyComponentProps {
   setCustomLocation: React.Dispatch<any>;
-  customLocation: any;
+  position: any;
   setAddress: React.Dispatch<any>;
-  setSelectedOption: React.Dispatch<any>;
 }
 
-export function GoogleMaps({customLocation,setCustomLocation,setSelectedOption}:MyComponentProps){
+export function GoogleMaps({position,setCustomLocation}:MyComponentProps){
 
+    console.log(position)
     const { isLoaded } = useJsApiLoader({ googleMapsApiKey:"AIzaSyA8431Ti3hFrTifFsj93xAVTx7IW0QLlDI" });
     const [center, setCenter] = useState(initialCenter);
-    if (!isLoaded) {
-        return <></>;
+
+    if (!isLoaded ) {
+    
+      return <></>;
     }
+
 
     // Function to handle marker drag end
     const handleDragEnd = (e: google.maps.MapMouseEvent) => {
-        if (e.latLng) {
-            if (e.latLng) {
-                const lat = e.latLng.lat() +9; 
-                const lng = e.latLng.lng() +9 ;
-                setCenter({ lat, lng });
-                setCustomLocation({ lat, lng });
-                setSelectedOption("");
-            }
-        }
+      if (e.latLng) {
+        const lat = e.latLng.lat();
+        const lng = e.latLng.lng();
+        setCenter({ lat, lng });
+        setCustomLocation({ lat, lng });
+
+
+        // ⬇️ Reverse geocoding
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+          if (status === "OK" && results && results[0]) {
+            const formattedAddress = results[0].formatted_address;
+          // setAddress(formattedAddress); // ← aqui atualiza o endereço com o novo valor
+            console.log("Endereço:", formattedAddress);
+          } else {
+            console.error("Erro ao buscar endereço:", status);
+          }
+        });
+      }
     };
+
 
     return(
         <>
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={customLocation}
+                center={center}
                 zoom={16}
                 options={{
                     styles: darkMap,    
                     disableDefaultUI: true, // Desabilita a interface padrão do Google Maps
-                    zoomControl: false, // Mantém o controle de zoom
+                    zoomControl: true, // Mantém o controle de zoom
                 }}
             >
 
                 <Marker
                     visible
-                    position={customLocation}
+                    position={position}
+                    draggable
+                   
+                />
+
+                <Marker
+                    icon={{
+                      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // cor azul
+                    }}
+                    visible
+                    position={{lat:-22.230946,lng:-54.781587}}
                     draggable
                     onDragEnd={handleDragEnd}
                 />

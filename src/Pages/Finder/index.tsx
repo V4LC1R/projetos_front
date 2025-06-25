@@ -1,24 +1,27 @@
 import { Page } from "@components/__common/Page";
 import { Filters, List, NoData } from "@components/Finder";
 import { SpinWithMessage } from "@components/Spin/SpinWithMessage";
+import { AreaByPosition } from "@services/Area";
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
 
 
 export function EventAndAreaSearch() {
-  const [dataList,setDataList] = useState([{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}])
+  const [dataList,setDataList] = useState<AreaByPosition[]>([])
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const [isLoading, setIsloading] = useState<boolean>(false);
-  const [params,setParams] = useState(searchParams.get('search') || '');
+  const [isLoading, ] = useState<boolean>(false);
+
+  function handleSearch(area:AreaByPosition[]){
+    setDataList(()=>area)
+  }
 
   return (
     <Page.Body className="md:h-auto md:w-[450px] w-full py-2 gap-2">
       <Page.Header  title="Encontre sua Área" removeBack/>
-      <Filters/>
+      <Filters onSearch={handleSearch}/>
       {
 
-        !!searchParams.get('search') &&
+        !!searchParams.get("categories") &&
           <Page.Main className="overflow-hidden">
             {
               isLoading
@@ -30,9 +33,9 @@ export function EventAndAreaSearch() {
                 )
                 : dataList.length > 0 
                     ? <List 
-                      className="md:h-[470px] h-[calc(100svh-12rem)]" 
-                      dataList={dataList}
-                    />
+                        className="md:h-[470px] h-[calc(100svh-12rem)]" 
+                        dataList={dataList}
+                      />
                     : <NoData/>
             }
           </Page.Main>

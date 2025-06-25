@@ -1,6 +1,5 @@
 import { Area } from "@services/Area"
 import { Event } from "@services/Event"
-import { AvailabilityStatus } from "@services/Shared/shared.types"
 
 export type User = {
     id: number,
@@ -16,6 +15,10 @@ export interface AuthResponse {
 
 export interface Owner extends User{
     areas:Area[]
+}
+
+export interface Guest extends User{
+   guestId:number
 }
 
 export interface Organizer extends User{

@@ -9,9 +9,10 @@ import { AppLayout } from "./Layout/AppLayout";
 import { AuthLayout } from "./Layout/AuthLayout";
 import { NotFound } from "./Pages/Errors/NotFound";
 import { AreaPage } from "@pages/Area";
-import { NotificationPage } from "@pages/Notifications";
 import { MyAreasPage } from "@pages/Area/MyAreas";
 import { ProfileAreaPage } from "@pages/Area/ProfileArea";
+import { AreasRequest } from "@pages/Request/AreasRequest";
+import { GuestRequest } from "@pages/Request/GuestRequest";
 
 export function Router(){
 
@@ -20,9 +21,10 @@ export function Router(){
             <Suspense fallback={<></>}>
                 <Routes>
                     <Route path="/app" element={ <AppLayout/> }>
-                        <Route index path="/app/finder/:search?" element={<EventAndAreaSearch/> }/>
+                        <Route index path="/app/finder" element={<EventAndAreaSearch/> }/>
                         <Route path="/app/area/:id" element={<AreaPage/>}/>
-                        <Route path="/app/requests" element={<NotificationPage/>}/>MyAreasPage
+                        <Route path="/app/requests" element={<AreasRequest/>}/>
+                        <Route path="/app/my-requests" element={<GuestRequest/>}/>
                         <Route path="/app/my-areas" element={<MyAreasPage/>}/>
                         <Route path="/app/my-area/:id?" element={<ProfileAreaPage/>}/>
                         <Route path="*" element={<NotFound/>}/>

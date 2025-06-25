@@ -41,8 +41,6 @@ export function BarChart({lable,value}:{lable:string[],value:number[]}) {
       }
     ],
   };
-
-  console.log(data)
   
   return <Bar 
     options={options} 

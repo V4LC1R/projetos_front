@@ -1,43 +1,36 @@
-import { FaClock, FaMap, FaSmile, FaUser } from "react-icons/fa";
+import { CategoryIcon } from "@components/CategoryIcon";
+import { Area } from "@services/Area";
+import { timestamps } from "@services/Format/Date";
+import { NumberHelper } from "@services/Format/Number";
+import { FaMap, FaSmile, FaUser } from "react-icons/fa";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 type RowProps = {
-    id:string
-    tags:any[]
-    area:any
-    scheduling:any[]
-    guest:any
-    status:any
+    area:Area
 }
 
-export function Row({}:Partial<RowProps>) {
-    // nome da area
-    // nome da pessoa
-    // data da solicitação
-    // status da solicitação
-    // periodo da solicitação
+export function Row({area}:RowProps) {
+
+    const splitValue = NumberHelper.numberMoneySplit(area.rent)
 
     return (
         <div className="w-full h-[85px] flex flex-row border-l-5 border-he-green-50 bg-gray-50 items-center md:items-start justify-between shadow rounded-[4px] p-[2px]">
             
             <div className="w-full justify-start h-full flex flex-col px-1 py-2">
                 <header className="w-full h-[14px] text-he-gray-50 flex flex-row font-semibold items-center gap-4 text-[11px]">
-                    <div className="flex flex-row gap-1 items-center">
-                        <RiMoneyDollarCircleFill/>
-                        Aluguel
-                    </div>
 
-                   <div className="flex flex-row gap-1 items-center">
-                        <FaSmile/>
-                        Lazer
-                    </div>
+                    {
+                        area.categories.map(c=><CategoryIcon name={c.name}/>)
+                    }
 
                 </header>
 
                 <main className="w-full mt-1 h-full text-he-gray-600 text-[11px] font-semibold flex flex-row items-center gap-2 justify-between">
-                    <div className=" text-[13px]  flex relative h-full flex-row gap-1 items-center">
-                        <FaMap/>
-                        <span className="text-he-gray-800 text-[18px]">Santa Colheita</span>
+                    <div className="w-full  flex relative h-full flex-row gap-1 items-center">
+                        <FaMap className="text-[11px]"/>
+                       <div className="w-[82%] truncate">
+                            <span className="text-he-gray-800 text-[16px] md:text-[18px]">{area.name}</span>
+                       </div>
                     </div>
                     
                         
@@ -45,7 +38,7 @@ export function Row({}:Partial<RowProps>) {
                         
                         <div className="text-he-gray-800 text-[15px] flex flex-col justify-end items-end">
                             <div>
-                                <span className="font-bold leading-[24px] text-[22px]">25</span>,00
+                                <span className="font-bold leading-[24px] text-[22px]">{splitValue[0]}</span>,{splitValue[1] ?? "00"}
                             </div>
                             
                         </div>
@@ -58,7 +51,7 @@ export function Row({}:Partial<RowProps>) {
                         <FaUser/>
                         <span className="text-he-gray-50">Criado em : </span>
 
-                        <span className="text-he-gray-50">14/07/2035 18:00</span>
+                        <span className="text-he-gray-50">{timestamps(area.createdAt)}</span>
                     </div>
 
                     <div className="flex flex-row gap-[4px]">

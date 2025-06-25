@@ -1,4 +1,4 @@
-import api from "../api"
+import api from "@services/Shared/api"
 import { AuthResponse, SignInFormRequest, User, UserFormRequest } from "./user.types"
 
 const basePath = '/auth'

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 
-export function NotificationPage() {
+export function AreasRequest() {
 
     const [request,setRequest] = useState<Request[]>([])
 

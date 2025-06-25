@@ -1,5 +1,5 @@
-import { Area } from './../Area/area.types';
-import api from "../api"
+import api from '@services/Shared/api';
+import { Area, AreaByPosition, Category } from './../Area/area.types';
 import { AreaFormRequest, AreaSearchByPosition } from "./area.types"
 
 const basePath = '/area'
@@ -24,8 +24,17 @@ export default {
         const {data}:{data:Area[]} = await api.get(`${basePath}/my-areas`)
         return data
     },
-    async byPosition(dataSearch:AreaSearchByPosition):Promise<Area[]>{
-        const {data}:{data:Area[]} = await api.get(`${basePath}/by-position`,{params:dataSearch})
+    async byPosition(dataSearch:AreaSearchByPosition):Promise<AreaByPosition[]>{
+        const params = new URLSearchParams()
+        params.set('distance',String(dataSearch.distance))
+        params.set('categoryId',JSON.stringify(dataSearch.categories))
+        params.set('lat',dataSearch.lat)
+        params.set('lng',dataSearch.lng)
+        const {data}:{data:AreaByPosition[]} = await api.get(`${basePath}/by-position?${params.toString()}`)
+        return data
+    },
+    async categories():Promise<Category[]>{
+        const {data}:{data:Category[]} = await api.get(`${basePath}/categories`)
         return data
     }
 }

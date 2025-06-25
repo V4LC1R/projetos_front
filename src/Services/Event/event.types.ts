@@ -15,6 +15,6 @@ export type Event = {
     schedule:Schedule[]
 }
 
-export interface EventFormRequest extends Pick<Event, "areaId" | "name" > {
-    password:string
+export interface EventFormRequest extends Pick<Event, "areaId" | "name" | "type"> {
+    schedules:number[]
 }

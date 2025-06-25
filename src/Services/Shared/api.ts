@@ -1,6 +1,6 @@
 
+import { getToken, logout } from "@services/LocalStorage/auth";
 import axios from "axios"
-import { getToken, logout } from "./LocalStorage/auth";
 
 const api = axios.create(
   {

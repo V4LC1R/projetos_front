@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 
-export function NotificationPage() {
+export function GuestRequest() {
 
     const [request,setRequest] = useState<Request[]>([])
 
 
     async function loadRequests(){
-        const data = await requestService.toOwner();
+        const data = await requestService.byGuest();
         setRequest(()=>data)
     }
 

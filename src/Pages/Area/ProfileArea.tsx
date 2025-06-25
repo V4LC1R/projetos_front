@@ -1,8 +1,5 @@
 import { Form } from "@components/__common/Form";
-import FileDropzone from "@components/__common/Form/UploadArea";
 import { Page } from "@components/__common/Page";
-import { FileUpload } from "primereact/fileupload";
-import { InputText } from "primereact/inputtext";
 import { useParams } from "react-router";
 
 export function ProfileAreaPage(){
@@ -16,7 +13,7 @@ export function ProfileAreaPage(){
            <Page.Main>
                 <Page.ScrollY>
                     <form className="flex flex-col w-full gap-5">
-                        <div className="flex flex-row relative p-2 bg-gray-100 rounded-[4px]">
+                        <div className="flex flex-row gap-1 relative p-2 bg-gray-50 rounded-[4px]">
                             <Form.Input
                                 label="Nome da Area"
                                 className="w-[75%]"
@@ -65,11 +62,6 @@ export function ProfileAreaPage(){
                                 styleLabel="bg-gray-100"
                                 inputStyle="bg-red"
                             />
-                        </div>
-
-                        <div>
-                           <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
-
                         </div>
                     </form>
                 </Page.ScrollY>

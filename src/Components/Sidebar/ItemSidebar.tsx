@@ -16,7 +16,7 @@ export function ItemSidebar({icon: Icon, label, url}:SidebarItemProps){
         >
             <li className="w-full grid grid-cols-[50px_1fr] justify-center ">
                 <div className="place-self-center">
-                    <Icon className="text-he-green-700 text-[22px]"/>
+                    <Icon className="text-he-green-700 text-[20px]"/>
             </div>
                 <span className="place-self-start  font-medium hover:text-he-green-600">{label}</span>
             </li>

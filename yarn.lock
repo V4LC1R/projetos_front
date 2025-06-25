@@ -1592,10 +1592,10 @@ react-geocode@^2.0.1:
   resolved "https://registry.npmjs.org/react-geocode/-/react-geocode-2.0.1.tgz"
   integrity sha512-fIjTaXK7Ta1kZKqS5n9vUCL6LPngSRlLfEj935mMhHivfsGQ8nXPo+NRoDnq63Yy1kQ6mdyFl78/8tAodERIHw==
 
-react-hook-form@^7.55.0:
-  version "7.56.4"
-  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.56.4.tgz"
-  integrity sha512-Rob7Ftz2vyZ/ZGsQZPaRdIefkgOSrQSPXfqBdvOPwJfoGnjwRJUs7EM7Kc1mcoDv3NOtqBzPGbcMB8CGn9CKgw==
+react-hook-form@^7.58.1:
+  version "7.58.1"
+  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.58.1.tgz"
+  integrity sha512-Lml/KZYEEFfPhUVgE0RdCVpnC4yhW+PndRhbiTtdvSlQTL8IfVR+iQkBjLIvmmc6+GGoVeM11z37ktKFPAb0FA==
 
 react-icons@^5.4.0:
   version "5.4.0"

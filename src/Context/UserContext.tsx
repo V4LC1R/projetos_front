@@ -55,8 +55,6 @@ export function UserProvider({children} : UserProviderProps){
     useEffect(()=>{
        const session = getSession()
 
-       console.log('seriao?',session)
-
         if(!session)
             return setIsAuth(false)
 

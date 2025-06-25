@@ -2,6 +2,8 @@ import { IoNotifications } from "react-icons/io5";
 import { ItemSidebar } from "./ItemSidebar";
 import { FaMapLocation } from "react-icons/fa6";
 import { AiFillHome } from "react-icons/ai";
+import { MdRequestQuote } from "react-icons/md";
+
 
 const sidebarItems = [
     {
@@ -11,7 +13,12 @@ const sidebarItems = [
     },
     {
         icon: IoNotifications,
-        label: "Solicitações",
+        label: "Minhas Solicitações",
+        url: "/my-requests"
+    },
+     {
+        icon: MdRequestQuote,
+        label: "Solicitações da Area",
         url: "/requests"
     },
     {

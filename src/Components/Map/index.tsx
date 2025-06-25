@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {setKey,fromLatLng} from "react-geocode";
 import { useUser } from "@context/UserContext";
 import {GoogleMaps} from "./GoogleMap";
+import { useInteration } from "@context/InterationContext";
 
 interface Address {
   address: string;
@@ -13,61 +14,51 @@ interface CustomLocation {
   lng: number;
 }
 
-export function Map()
-{
-    const {user} = useUser()
+export function Map(){
 
-    const [address, setAddress] = useState<Address>({
-        address: "1600 Amphitheatre Parkway, Mountain View, CA"
-    });
-    const [customLocation, setCustomLocation] = useState<CustomLocation | null>(
-        null
-    );
-    const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-    const handleDrawerToggle = () => {
-        setDrawerOpen(!drawerOpen);
-    };
-    const [selectedOption, setSelectedOption] = useState<string>("");
-    // const [locationMain,setLocationMain]=useState<Address>({address:""})
+  const {user} = useUser()
+  const {location} = useInteration()
 
-    useEffect(() => {
-        setKey("AIzaSyA8431Ti3hFrTifFsj93xAVTx7IW0QLlDI");
-        setCustomLocation({ lat:  -22.245053, lng: -54.822179 });
-    }, []);
+  const [address, setAddress] = useState<Address>({
+      address: "1600 Amphitheatre Parkway, Mountain View, CA"
+  });
+  const [customLocation, setCustomLocation] = useState(
+      {}
+  );
+ 
+  const [selectedOption, setSelectedOption] = useState<string>("");
+  // const [locationMain,setLocationMain]=useState<Address>({address:""})
 
   useEffect(() => {
-    //if (customLocation) {
-      fromLatLng(
-        -22.245053,
-        -54.822179
-      )
-        .then((response) => {
-          const address = response.results[0].formatted_address;
-          setAddress((prevAddress) => ({ ...prevAddress, address }));
-          handleDrawerToggle();
-          console.log(response, "response");
-          //({ lat, lng });
-          console.log("Address Aakash:", address);
-        })
-        .catch((error) => {
-          console.error("Error while geocoding:", error);
-        });
+    setKey("AIzaSyA8431Ti3hFrTifFsj93xAVTx7IW0QLlDI");        
+  }, []);
+
+  async function setUpGeoLocation(){
+    if(!location.latitude || !location.longitude)
+      return
+
+    setCustomLocation(()=>({ lat:  location.latitude, lng: location.longitude }));
+    const data = await fromLatLng(location.latitude,location.longitude)
+    console.log(data)
+  }
+
+  useEffect(() => {
+    setUpGeoLocation()
     
-  }, [customLocation]);
+  }, [location]);
 
-  useEffect(() => {
-    console.log(customLocation, "location Main Page");
-  }, [customLocation]);
-
-    return (
-        <>
+  return (
+    <>
+      {
+        (location.latitude && location.longitude ) &&
           <GoogleMaps
-              customLocation={customLocation}
+              position={customLocation}
               setCustomLocation={setCustomLocation}
               setAddress={setAddress}
-              setSelectedOption={setSelectedOption}
-          />
-        </>
-                    
-    )
+          /> 
+      }
+      
+    </>
+                  
+  )
 }
