@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Page } from "@components/__common/Page";
-import { ProfileGuest } from "@components/Area/ProfileGuest";
 import { useParams } from "react-router";
 import { FaArrowLeft } from "react-icons/fa";
 
