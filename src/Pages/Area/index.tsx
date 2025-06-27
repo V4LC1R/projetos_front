@@ -39,7 +39,7 @@ function SolicitationCard({
   );
 }
 
-// Função para calcular horário final (1h40min depois)
+
 function calcularHorarioFinal(horarioInicial: string): string {
   const [hora, minuto] = horarioInicial.split(":").map(Number);
   const totalMinutos = hora * 60 + minuto + 100; // 1h40min = 100 minutos
@@ -56,6 +56,8 @@ export function AreaPage() {
 
   const horariosDisponiveis = ["14:00", "16:00", "18:00", "20:00"];
 
+  const [scheduleIds, setScheduleIds] = useState<number[] > ([])
+
   const solicitationInfo = {
     areaName: "Área X",
     userName: "José da Silva Moura",
@@ -64,12 +66,27 @@ export function AreaPage() {
     period: "10:00 - 12:00",
   };
 
+function selectItem(item:number){
+
+    const updateId = [...scheduleIds];
+    const indexProduct = updateId.findIndex(idItem=>idItem === item);
+    
+    if(indexProduct>=0){
+        updateId.splice(indexProduct,1);
+    }else{
+        updateId.push(item)
+    }
+
+    setScheduleIds(updateId);
+
+}
+
   return (
     <Page.Body className="py-2">
       <Page.Header title="Área X" />
 
       <Page.Main>
-        {selectedHorario ? (
+        {false? (
           <div className="p-4 border rounded-xl shadow-md bg-white w-full max-w-lg mx-auto mt-4 overflow-auto max-h-[500px]">
             <button
               onClick={() => setSelectedHorario(null)}
