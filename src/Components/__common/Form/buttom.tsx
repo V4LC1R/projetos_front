@@ -23,7 +23,7 @@ export function ButtonCutom({className,variant,children,...props}: ButtonCustomP
     return (
         <Button
             {...props}
-            className={twMerge("transition duration-200 w-[50px] h-[40px] rounded-[4px] justify-center  items-center",variantInUse,className)}
+            className={twMerge("transition duration-200 p-2 rounded-[4px] justify-center  items-center",variantInUse,className)}
         >
             {children}
         </Button>

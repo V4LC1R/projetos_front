@@ -19,8 +19,8 @@ export function Select({label,selectStyle,styleLabel,options, ...props}:SelectCu
 
     return (
         <>
-            <div className="relative flex flex-col gap-[3px] w-full border border-he-gray-200 rounded-[4px] focus:border-he-green-500">
-                { label && <label className={twMerge("text-he-gray-700 rounded-4xl text-sm absolute bg-white bottom-[28px] left-1 px-2",styleLabel)}>{label}</label> }
+            <div className="relative my-1 flex flex-col gap-[3px] w-full border border-he-gray-200 rounded-[4px] focus:border-he-green-500">
+                { label && <label className={twMerge("text-he-gray-700 rounded-4xl text-sm absolute bg-white bottom-[34px] left-1 px-2",styleLabel)}>{label}</label> }
                 <select
                     {...props}
                     className={twMerge("h-[40px] w-full px-2 focus:outline-none text-[16px]",selectStyle)}

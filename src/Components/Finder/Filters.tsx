@@ -118,7 +118,7 @@ export function Filters({onSearch}:FiltersProps){
                 </div> 
                         
                 <div className='flex-row items-end flex gap-1'>
-                    <Form.Button type="submit" onClick={handleSearch}><FaSearch/></Form.Button>
+                    <Form.Button type="submit" className="h-[42px] w-[47px]" onClick={handleSearch}><FaSearch/></Form.Button>
                 </div>
             </Page.Main>
         </form>

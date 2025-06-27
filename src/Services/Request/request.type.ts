@@ -16,6 +16,7 @@ export type Request = {
     owner:Guest
     schedule:Schedule[]
     status:StatusRequestEnum
+    nameEvent:string
 }
 
 export type RequestForm = {

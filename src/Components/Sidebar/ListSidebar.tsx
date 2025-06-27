@@ -3,6 +3,7 @@ import { ItemSidebar } from "./ItemSidebar";
 import { FaMapLocation } from "react-icons/fa6";
 import { AiFillHome } from "react-icons/ai";
 import { MdRequestQuote } from "react-icons/md";
+import { BsCalendar2EventFill } from "react-icons/bs";
 
 
 const sidebarItems = [
@@ -26,21 +27,11 @@ const sidebarItems = [
         label: "Areas",
         url: "/my-areas",
     },
-    // {
-    //     icon: FaUserGroup,
-    //     label: "Equipes",
-    //     url: "/teams"
-    // },
-    // {
-    //     icon: RiSettings4Fill,
-    //     label: "Configurações",
-    //     url: "/settings"
-    // },
-    // {
-    //     icon: IoPieChartSharp,
-    //     label: "Relatórios",
-    //     url: "/reports"
-    // }
+    {
+        icon: BsCalendar2EventFill,
+        label: "Eventos",
+        url: "/my-events",
+    },
 ]
 
 

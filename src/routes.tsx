@@ -13,6 +13,7 @@ import { MyAreasPage } from "@pages/Area/MyAreas";
 import { ProfileAreaPage } from "@pages/Area/ProfileArea";
 import { AreasRequest } from "@pages/Request/AreasRequest";
 import { GuestRequest } from "@pages/Request/GuestRequest";
+import { EventsPage } from "@pages/Events";
 
 export function Router(){
 
@@ -27,6 +28,7 @@ export function Router(){
                         <Route path="/app/my-requests" element={<GuestRequest/>}/>
                         <Route path="/app/my-areas" element={<MyAreasPage/>}/>
                         <Route path="/app/my-area/:id?" element={<ProfileAreaPage/>}/>
+                        <Route path="/app/my-events" element={<EventsPage/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
 

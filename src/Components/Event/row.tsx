@@ -4,10 +4,11 @@ import { Request, StatusRequestEnum } from "@services/Request/request.type";
 import { FaClock, FaMap, FaUser } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 import { HiUserGroup } from "react-icons/hi2";
+import { Event } from "@services/Event";
 
 
 type RequestRowProps = {
-   req:Request
+   req:Event
 }
 
 

@@ -1,3 +1,4 @@
+import { Area } from "@services/Area";
 import { Schedule } from "@services/Schedule/schedule.types";
 
 export enum EventTypeEnum{
@@ -11,6 +12,7 @@ export type Event = {
     name:string
     areaId:number
     guestId:number
+    area:Area
     type:EventTypeEnum
     schedule:Schedule[]
 }

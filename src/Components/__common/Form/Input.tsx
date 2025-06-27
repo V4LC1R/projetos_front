@@ -14,7 +14,7 @@ export function InputCustom({label,icon,className,styleLabel,iconStyle,inputStyl
     const Icon = icon ? icon: null;
 
     return (
-        <div className={twMerge("mt-1 mb-1 w-full",className)}>
+        <div className={twMerge("my-1 w-full",className)}>
             <div className="relative flex flex-col gap-[3px] w-full border border-he-gray-200 rounded-[4px] focus:border-he-green-500">
             { label && <label className={twMerge("text-he-gray-700 rounded-4xl text-sm absolute bg-white bottom-[28px] left-1 px-2",styleLabel)}>{label}</label> }
                 <input

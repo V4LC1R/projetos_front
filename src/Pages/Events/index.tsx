@@ -5,12 +5,12 @@ import { Request as RequestComponent } from "@components/Request";
 import { DetailsRequestModal } from "@components/Request/detailsRequestModal";
 import requestService from "@services/Request/request.service";
 import { Request, StatusRequestEnum } from "@services/Request/request.type";
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaSearch } from "react-icons/fa";
 
 
-export function AreasRequest() {
+export function EventsPage() {
 
     const [request,setRequest] = useState<Request[]>([])
     const [openDetails,setOpenDetails] = useState<boolean>(false)
@@ -104,13 +104,13 @@ export function AreasRequest() {
                         requestOpened.status === StatusRequestEnum.AWAIT &&
                         <div className="w-full flex flex-row gap-2 justify-end">
                             <Form.Button 
-                                variant="secondary"
+                                className="bg-he-red-400 hover:bg-he-red-500 text-white"
                                 onClick={handleReject}
                             >
                                 Rejeitar
                             </Form.Button>
                             <Form.Button 
-                                
+                                className="bg-he-green-400 hover:bg-he-green-500 text-white"
                                 onClick={handleAcept}
                             >
                                 Aceitar
