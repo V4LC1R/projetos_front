@@ -4,6 +4,7 @@ import { timestamps } from "@services/Format/Date";
 import { NumberHelper } from "@services/Format/Number";
 import { FaMap, FaSmile, FaUser } from "react-icons/fa";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { useNavigate } from "react-router";
 
 type RowProps = {
     area:Area
@@ -11,13 +12,19 @@ type RowProps = {
 
 export function Row({area}:RowProps) {
 
+    const navi = useNavigate()
+
+    function handleShowArea(){
+        navi(`/app/my-area/${area.id}`)
+    }   
+
     const splitValue = NumberHelper.numberMoneySplit(area.rent)
 
     return (
-        <div className="w-full h-[85px] flex flex-row border-l-5 border-he-green-50 bg-gray-50 items-center md:items-start justify-between shadow rounded-[4px] p-[2px]">
+        <div onClick={handleShowArea} className="w-full h-[85px] flex flex-row border-l-5 border-he-green-50 bg-gray-50 items-center md:items-start justify-between shadow rounded-[4px] p-[2px]">
             
             <div className="w-full justify-start h-full flex flex-col px-1 py-2">
-                <header className="w-full h-[14px] text-he-gray-50 flex flex-row font-semibold items-center gap-4 text-[11px]">
+                <header className="w-full max-w-[50%] overflow-x-clip h-[14px] text-he-gray-50 flex flex-row font-semibold items-center gap-4 text-[11px]">
 
                     {
                         area.categories.map(c=><CategoryIcon name={c.name}/>)

@@ -117,20 +117,38 @@ export function ProfileAreaPage(){
             categories: selectedCategories.map(c => parseInt(String(c.value))),
             schedule: newSchedules,
         };
-
-        areaService.create(areaData)
         
         toast.promise(
             areaService.create(areaData),
             {
                 loading: "Cadastrando área...",
                 success: () => {
-                    toast.success("Área cadastrada com sucesso!");
+
                     return "Área cadastrada com sucesso!";
                 },
                 error: (error) => {
                     console.error(error);
                     return "Erro ao cadastrar área, tente novamente mais tarde!";
+                }
+            }
+        )
+    }
+
+    function hadleDeleteArea(){
+        if(!id)
+            return
+        toast.promise(
+            areaService.delete(parseInt(id)),
+            {
+                loading: "Excluindo área...",
+                success: () => {
+                   
+                    location.href = "/app/my-areas";
+                    return "Área excluída com sucesso!";
+                },
+                error: (error) => {
+                    console.error(error);
+                    return "Erro ao excluir área, tente novamente mais tarde!";
                 }
             }
         )
@@ -149,6 +167,43 @@ export function ProfileAreaPage(){
         }])
     },[id])
 
+    function loadArea() {
+        if(!id)
+            return
+
+        areaService.show(parseInt(id)).then((area) => {
+            setFormData({
+                name: area.name,
+                rent:String(area.rent),
+                address: {
+                    country: area.address.country,
+                    street: area.address.street,
+                    number_place: area.address.number_place,
+                    district: area.address.district,
+                    city: area.address.city,
+                    state: area.address.state,
+                    complement: area.address.complement
+                }
+            });
+
+            setAreaLocation({
+                latitude: parseFloat(area.address.latitude),
+                longitude: parseFloat(area.address.longitude)
+            });
+
+            setSelectedCategories(area.categories.map(c => ({
+                label: c.name,
+                value: c.id
+            })));
+
+            setNewSchedules(area.schedule.map(s => ({
+                date: s.date,
+                start_time: s.start_time,
+                end_time: s.end_time
+            })));
+        });
+    }
+
     useEffect(()=>{
         if(!markInMap)
             return
@@ -162,6 +217,11 @@ export function ProfileAreaPage(){
         })
     }, [locationMarked])
        
+    useEffect(()=>{
+        if(!id)
+            return
+        loadArea();
+    }, [id])
 
     return (
         <Page.Body className={!markInMap?"py-2 h-[90svh] md:h-[90svh]":"py-2 h-[15svh] md:h-[15svh] md:w-[100px] bg-transparent"}>
@@ -343,9 +403,18 @@ export function ProfileAreaPage(){
                             </Page.ScrollY>
                         </div>
                     </Page.ScrollY>
-                    <Form.Button onClick={()=>handleSaveArea()} className="w-full mt-2">
-                        Cadastrar Area
-                    </Form.Button>
+                    <div className="w-full flex flex-col gap-2">
+                        {
+                            id && (
+                                <Form.Button onClick={()=>hadleDeleteArea()} className="w-full mt-2">
+                                    Excluir Area
+                                </Form.Button>
+                            )
+                        }
+                        <Form.Button onClick={()=>handleSaveArea()} className="w-full mt-2">
+                            Cadastrar Area
+                        </Form.Button>
+                    </div>
                 </Page.Main>
             )
            }

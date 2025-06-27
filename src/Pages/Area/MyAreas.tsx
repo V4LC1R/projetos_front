@@ -31,16 +31,20 @@ export function MyAreasPage(){
             <Page.Header title="Minhas Areas" />
             <Page.Main>
                 <form className="flex flex-row w-full items-end gap-1">
-                    <Form.Input
+                    {/* <Form.Input
                         label="Area"
                         placeholder="Pesquise aqui suas areas"
-                    />
-                    <Form.Button className="w-[46.5px] h-[42.5px]">
-                        <FaSearch/>
-                    </Form.Button>
-                    <Form.Button onClick={handleCreateArea} className="w-[46.5px] h-[42.5px]">
-                        <FaPlus/>
-                    </Form.Button>
+                    /> */}
+                     <div className='flex-row items-end flex mb-1 gap-1'>
+                        {/* <Form.Button className="w-[46.5px] h-[42.5px]">
+                            <FaSearch/>
+                        </Form.Button> */}
+                        <Form.Button onClick={handleCreateArea} className=" h-[32.5px]">
+                            Adicionar Area <FaPlus/>
+                        </Form.Button>
+                    </div>
+                    
+                   
                 </form>
 
                 <Page.ScrollY className="h-[calc(100%-5rem)] ">

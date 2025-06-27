@@ -44,8 +44,8 @@ export function DetailsRequestModal({req}:DetailsRequestModalProps){
             <main className="flex flex-col gap-1 w-full h-full" >
                <p>
                     O interessado <span className="font-black">{req.owner.name}</span>, 
-                    <span>{!!req.owner.cellphone  ? ` do telefone ${req.owner.cellphone}`:""} </span>
-                    deseja alugar a area nos peridos:
+                    <span className="font-black">{!!req.owner.cellphone  ? ` do telefone ${req.owner.cellphone}`:""} </span>
+                    deseja alugar a area <span className="font-black">{req.area.name}</span> nos peridos:
                </p>
 
                <Page.ScrollY className="max-h-[200px] p-2" areaScrollClass="gap-1">

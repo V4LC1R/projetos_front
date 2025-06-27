@@ -29,7 +29,7 @@ export function CategoryIcon({ name,iconClass,categoryClass }: CategoryIconProps
     return (
         <div className={twMerge("flex flex-row gap-1 items-center")}>
             <Icon className={twMerge("text-[12px]",iconClass)} />
-            <span className={twMerge("text-[11px] capitalize",categoryClass)}>{formatedName}</span>
+            <span className={twMerge("text-[11px] capitalize whitespace-nowrap",categoryClass)}>{formatedName}</span>
         </div>
     );
 }

@@ -124,12 +124,14 @@ export function AreasRequest() {
                 <Page.Header title="Solicitações" />
 
                 <Page.Main>
-                    <div className="w-full flex flex-row items-end gap-1 justify-start ">
+                    {/* <div className="w-full flex flex-row items-end gap-1 justify-start ">
                         <Form.Input
                             placeholder="Pesquisar por nome da área ou pessoa"
                         />
-                        <Form.Button className="h-[42.5px]"><FaSearch/></Form.Button>
-                    </div>
+                        <div className='flex-row items-end flex mb-1 gap-1'>
+                            <Form.Button className="h-[42px] w-[47px]"><FaSearch/></Form.Button>
+                        </div>
+                    </div> */}
                 
                     <Page.ScrollY className="md:h-[470px] h-[470px]">
                         {

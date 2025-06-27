@@ -43,12 +43,11 @@ export function RequestRow({req}:RequestRowProps) {
     return (
         <div className="w-full h-[100px] hover:bg-gray-100 cursor-pointer transition-all flex flex-row bg-gray-50 items-center md:items-start justify-between shadow rounded-[4px] p-[2px]">
             <span className="bg-he-green-50 rounded-tl-[3px] rounded-bl-[3px] h-full w-[3px]"></span>
-            <div className="w-full h-full flex flex-col px-1 py-2 justify-between">
-                <header className="w-full h-[14px] text-he-gray-50 flex flex-row font-semibold items-center gap-4 text-[11px]">
+            <div className="w-full  max-w-[99%] h-full flex flex-col px-1 py-2 justify-between">
+                <header className="w-full max-w-[50%] overflow-x-clip h-[14px] text-he-gray-50 flex flex-row font-semibold items-center gap-4 text-[11px]">
                     {
                         req.area.categories.map((c,i)=><CategoryIcon key={i} name={c.name}/>)
                     }
-
                 </header>
 
                 <main className="w-full mt-1 h-full text-he-gray-600 text-[11px] font-semibold flex flex-row items-center gap-2 justify-between">

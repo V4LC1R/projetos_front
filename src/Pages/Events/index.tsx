@@ -89,14 +89,16 @@ export function EventsPage() {
                 <Page.Header title="Eventos" />
 
                 <Page.Main>
-                    <div className="w-full flex flex-row items-end gap-1 justify-start ">
+                    {/* <div className="w-full flex flex-row items-end gap-1 justify-start ">
                         <Form.Input
                             placeholder="Pesquisar por nome da área ou pessoa"
                         />
-                        <Form.Button className="h-[42.5px]"><FaSearch/></Form.Button>
-                    </div>
+                        <div className='flex-row items-end flex mb-1'>
+                            <Form.Button className="h-[42px] w-[47px]"><FaSearch/></Form.Button>
+                        </div>
+                    </div> */}
                 
-                    <Page.ScrollY className="h-[270px]">
+                    <Page.ScrollY className="h-[600px]">
                         {
                             events.map((r,i)=>(
                                 <div onClick={()=>handleDetails(r)} key={i}>

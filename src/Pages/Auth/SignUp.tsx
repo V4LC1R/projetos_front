@@ -24,10 +24,10 @@ export function SignUp(){
                 return setError(()=>err)
             }
 
-            if(!isStrongPassword(confirmPassword)){
-                err = {has:true,message:"Senha fraca..... coloque : \n numeros, \n caracteres especiais, \nmaiusculas \nminusculas \ne 8 caracteres"}
-                return setError(()=>err)
-            }
+            // if(!isStrongPassword(confirmPassword)){
+            //     err = {has:true,message:"Senha fraca..... coloque : \n numeros, \n caracteres especiais, \nmaiusculas \nminusculas \ne 8 caracteres"}
+            //     return setError(()=>err)
+            // }
                 
             setError(()=>err)
     

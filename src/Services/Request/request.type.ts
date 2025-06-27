@@ -21,6 +21,7 @@ export type Request = {
 
 export type RequestForm = {
     message:string
+    nameEvent:string,
     areaId:number,
 	schedules:number[]
 }
