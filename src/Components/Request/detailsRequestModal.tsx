@@ -1,16 +1,45 @@
 import { Form } from "@components/__common/Form";
 import { Page } from "@components/__common/Page";
 import { onlYDate, times } from "@services/Format/Date";
-import { Request } from "@services/Request/request.type";
+import { Request, StatusRequestEnum } from "@services/Request/request.type";
+import { twMerge } from "tailwind-merge";
 
 export type DetailsRequestModalProps = {
     req:Request
 }
 
+type StatusVariantType = Record<StatusRequestEnum,{style:string,text:string}>
+
 export function DetailsRequestModal({req}:DetailsRequestModalProps){
+
+    const statusVariants:StatusVariantType = {
+        0:{
+            text:"Pendente",
+            style:"bg-blue-400 border border-blue-600 text-white"
+        },
+        1:{
+            text:"Aceita",
+            style:"bg-he-green-400 border border-he-green-600 text-white"
+        },
+        2:{
+            text:"Rejeitada",
+            style:"bg-red-400 border border-red-600 text-white"
+        },
+        3:{
+            text:"Cancelada",
+            style:"bg-gray-400"
+        }
+    }
 
     return (
         <div className="w-full flex flex-col gap-4 justify-between h-full">
+
+            {
+                req.status !== StatusRequestEnum.AWAIT && 
+                <div className={twMerge("flex flex-row text-center justify-center rounded-[10px] gap-2 p-2",statusVariants[req.status].style)}>
+                    <p> Essa requisicao está <span>{statusVariants[req.status].text}</span></p>
+                </div>
+            }
 
             <main className="flex flex-col gap-1 w-full h-full" >
                <p>
@@ -51,6 +80,8 @@ export function DetailsRequestModal({req}:DetailsRequestModalProps){
                 }
 
             </main>
+
+          
 
         </div>
     )

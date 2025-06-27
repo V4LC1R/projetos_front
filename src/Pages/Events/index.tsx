@@ -1,87 +1,31 @@
 import { Form } from "@components/__common/Form";
 import { Modal } from "@components/__common/Modal";
 import { Page } from "@components/__common/Page";
-import { Request as RequestComponent } from "@components/Request";
-import { DetailsRequestModal } from "@components/Request/detailsRequestModal";
-import requestService from "@services/Request/request.service";
-import { Request, StatusRequestEnum } from "@services/Request/request.type";
+import { Event as EventComponents } from "@components/Event";
+import { Event } from "@services/Event";
+import eventService from "@services/Event/event.service";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { FaSearch } from "react-icons/fa";
 
 
 export function EventsPage() {
 
-    const [request,setRequest] = useState<Request[]>([])
+    const [events,setEvents] = useState<Event[]>([])
     const [openDetails,setOpenDetails] = useState<boolean>(false)
-    const [requestOpened,setRequestOpened] = useState<Request>({} as Request)
+    const [eventOpened,setEventOpened] = useState<Event>({} as Event)
 
-    async function loadRequests(){
-        const data = await requestService.toOwner();
-        setRequest(()=>data)
+    async function loadEvents(){
+        const data = await eventService.byGuest();
+        setEvents(data);
     }
 
-    function handleDetails(req:Request){
-        setRequestOpened(()=>req)
+    function handleDetails(event:Event){
+        setEventOpened(()=>event)
         setOpenDetails(e=>!openDetails)
     }
 
-    function selectItem(status:StatusRequestEnum){
-
-        const updateRequests = [...request];
-        const indexProduct = updateRequests.findIndex(idItem=>idItem.id === requestOpened.id);
-        const updateItem = {...requestOpened};
-        updateItem.status = status;
-        
-        if(indexProduct>=0){
-            updateRequests.splice(indexProduct,1);
-
-            updateRequests.push(updateItem)
-        }
-    
-        setRequest(updateRequests);
-    
-    }
-
-    async function handleAcept(){
-
-        try {
-            await toast.promise(
-                requestService.ownerAcept(requestOpened.id),
-                {
-                    loading: 'Rejeitando...',
-                    success: <b>A requisicao foi rejeitada</b>,
-                    error: <b>Desculpe mas algo deu errado</b>,
-                  }
-            )
-            selectItem(StatusRequestEnum.ACEPT)
-            setOpenDetails(e=>!openDetails)
-            
-        } catch (error) {
-            
-        }
-    }
-
-    async function handleReject(){
-        try {
-            await toast.promise(
-                requestService.ownerReject(requestOpened.id),
-                {
-                    loading: 'Rejeitando...',
-                    success: <b>A requisicao foi rejeitada</b>,
-                    error: <b>Desculpe mas algo deu errado</b>,
-                  }
-            )
-            selectItem(StatusRequestEnum.REJECT)
-            setOpenDetails(e=>!openDetails)
-            
-        } catch (error) {
-            
-        }
-    }
-
     useEffect(()=>{
-        loadRequests()
+        loadEvents()
     },[])
 
     return (
@@ -96,32 +40,25 @@ export function EventsPage() {
                 <div className="w-full h-full flex flex-col gap-1">
                     <header className="w-full">
                         <h1 className=" text-xl font-extrabold text-he-gray-400">
-                            Solicitação de uso da área
+                           Evento
                         </h1>
                     </header>
-                    <DetailsRequestModal req={requestOpened}/>
-                    {
-                        requestOpened.status === StatusRequestEnum.AWAIT &&
-                        <div className="w-full flex flex-row gap-2 justify-end">
-                            <Form.Button 
-                                className="bg-he-red-400 hover:bg-he-red-500 text-white"
-                                onClick={handleReject}
-                            >
-                                Rejeitar
-                            </Form.Button>
-                            <Form.Button 
-                                className="bg-he-green-400 hover:bg-he-green-500 text-white"
-                                onClick={handleAcept}
-                            >
-                                Aceitar
-                            </Form.Button>
-                        </div>
-                    }
+                    <EventComponents.Detail event={eventOpened}/>
+                   
+                    <div className="w-full flex flex-row gap-2 justify-end">
+                        <Form.Button 
+                            className="bg-he-red-400 hover:bg-he-red-500 text-white"
+                        >
+                            Cancelar
+                        </Form.Button>
+                    
+                    </div>
+                    
                 </div>
             </Modal>
        
             <Page.Body className=" h-[600px] w-ful py-2 gap-2">
-                <Page.Header title="Solicitações" />
+                <Page.Header title="Eventos" />
 
                 <Page.Main>
                     <div className="w-full flex flex-row items-end gap-1 justify-start ">
@@ -133,9 +70,9 @@ export function EventsPage() {
                 
                     <Page.ScrollY className="md:h-[470px] h-[470px]">
                         {
-                            request.map((r,i)=>(
+                            events.map((r,i)=>(
                                 <div onClick={()=>handleDetails(r)} key={i}>
-                                    <RequestComponent.Row req={r} />
+                                    <EventComponents.Row req={r} />
                                 </div>
                             ))
                         }
