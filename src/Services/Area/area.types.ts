@@ -1,4 +1,4 @@
-import { Schedule } from "@services/Schedule/schedule.types"
+import { Schedule, ScheduleFormRequest } from "@services/Schedule/schedule.types"
 
 export type AreaByPosition = {
     areas_id: number;
@@ -52,6 +52,11 @@ export type AreaSearchByPosition = {
     categories:number[]
 }
 
-export interface AreaFormRequest extends Omit<Area, "id" | "createdAt" | "updatedAt" | "ownerId" | "address"> {
-    address: Omit<Address, "id" | "areaId">;
+export type AddressFormRequest = Omit<Address, "id" | "areaId" >;
+
+export interface AreaFormRequest extends Omit<Area, "id"| "rent" | "createdAt" | "updatedAt" | "ownerId" | "address" | "schedule" | "categories"> {
+    address: AddressFormRequest;
+    schedule:ScheduleFormRequest[],
+    rent:string
+    categories: number[]; // IDs das categorias selecionadas
 }

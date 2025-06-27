@@ -17,7 +17,7 @@ interface CustomLocation {
 export function Map(){
 
   const {user} = useUser()
-  const {location} = useInteration()
+  const {location,markInMap,getMarkeFromMap} = useInteration()
 
   const [address, setAddress] = useState<Address>({
       address: "1600 Amphitheatre Parkway, Mountain View, CA"
@@ -53,6 +53,8 @@ export function Map(){
         (location.latitude && location.longitude ) &&
           <GoogleMaps
               position={customLocation}
+              markInMap={markInMap}
+              onMark={getMarkeFromMap}
               setCustomLocation={setCustomLocation}
               setAddress={setAddress}
           /> 

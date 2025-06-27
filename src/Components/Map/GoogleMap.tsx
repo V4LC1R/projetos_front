@@ -173,77 +173,75 @@ const initialCenter = { lat:  -22.245053, lng: -54.822179 };
 // const libraries = ["places"]; // Add this
 interface MyComponentProps {
   setCustomLocation: React.Dispatch<any>;
+  markInMap?: boolean;
   position: any;
   setAddress: React.Dispatch<any>;
+  onMark?:(position: { lat: number; lng: number }) => void;
 }
 
-export function GoogleMaps({position,setCustomLocation}:MyComponentProps){
+export function GoogleMaps({position,markInMap,onMark,setCustomLocation}:MyComponentProps){
+  const { isLoaded } = useJsApiLoader({ googleMapsApiKey:"AIzaSyA8431Ti3hFrTifFsj93xAVTx7IW0QLlDI" });
+  const [center, setCenter] = useState(initialCenter);
 
-    console.log(position)
-    const { isLoaded } = useJsApiLoader({ googleMapsApiKey:"AIzaSyA8431Ti3hFrTifFsj93xAVTx7IW0QLlDI" });
-    const [center, setCenter] = useState(initialCenter);
+  if (!isLoaded ) {
+    return <></>;
+  }
 
-    if (!isLoaded ) {
-    
-      return <></>;
-    }
+  // Function to handle marker drag end
+  const handleDragEnd = (e: google.maps.MapMouseEvent) => {
+    if (e.latLng) {
+      const lat = e.latLng.lat();
+      const lng = e.latLng.lng();
+      setCenter({ lat, lng });
+      setCustomLocation({ lat, lng });
 
-
-    // Function to handle marker drag end
-    const handleDragEnd = (e: google.maps.MapMouseEvent) => {
-      if (e.latLng) {
-        const lat = e.latLng.lat();
-        const lng = e.latLng.lng();
-        setCenter({ lat, lng });
-        setCustomLocation({ lat, lng });
-
-
-        // ⬇️ Reverse geocoding
-        const geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-          if (status === "OK" && results && results[0]) {
-            const formattedAddress = results[0].formatted_address;
-          // setAddress(formattedAddress); // ← aqui atualiza o endereço com o novo valor
-            console.log("Endereço:", formattedAddress);
-          } else {
-            console.error("Erro ao buscar endereço:", status);
-          }
-        });
+      if (onMark) {
+        onMark({ lat, lng }); // Call the onMark function with the new position
       }
-    };
+      // ⬇️ Reverse geocoding
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+        if (status === "OK" && results && results[0]) {
+          const formattedAddress = results[0].formatted_address;
+        // setAddress(formattedAddress); // ← aqui atualiza o endereço com o novo valor
+          console.log("Endereço:", formattedAddress);
+        } else {
+          console.error("Erro ao buscar endereço:", status);
+        }
+      });
+    }
+  };
 
+  return(
+    <>
+      <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={16}
+          options={{
+              styles: darkMap,    
+              disableDefaultUI: true, // Desabilita a interface padrão do Google Maps
+              zoomControl: true, // Mantém o controle de zoom
+          }}
+      >
+        <Marker
+          visible
+          position={position}
+          draggable={markInMap}
+          onDragEnd={handleDragEnd}
+        />
 
-    return(
-        <>
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={16}
-                options={{
-                    styles: darkMap,    
-                    disableDefaultUI: true, // Desabilita a interface padrão do Google Maps
-                    zoomControl: true, // Mantém o controle de zoom
-                }}
-            >
+        {/* <Marker
+          icon={{
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // cor azul
+          }}
+          visible
+          position={{lat:position.lat+0.0009,lng:position.lng+0.00005}}
+          draggable
+          onDragEnd={handleDragEnd}
+        /> */}
 
-                <Marker
-                    visible
-                    position={position}
-                    draggable
-                   
-                />
-
-                <Marker
-                    icon={{
-                      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // cor azul
-                    }}
-                    visible
-                    position={{lat:-22.230946,lng:-54.781587}}
-                    draggable
-                    onDragEnd={handleDragEnd}
-                />
-
-            </GoogleMap>
-        </>
-    )
+      </GoogleMap>
+    </>
+  )
 }

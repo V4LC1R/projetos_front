@@ -1,11 +1,13 @@
 import { AvailabilityStatus } from "@services/Shared/shared.types";
 
 export type Schedule = {
-    start_time: Date;
-    end_time: Date;
+    start_time: string | Date;
+    end_time: string | Date;
     status:AvailabilityStatus
-    date:Date
+    date:string | Date
     id:number;
     areaId:number
     eventId:number
 }
+
+export type ScheduleFormRequest = Omit<Schedule, "id" | "areaId" | "eventId" | "status"> ;
