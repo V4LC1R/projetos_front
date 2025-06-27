@@ -17,7 +17,7 @@ export function EventAndAreaSearch() {
 
   return (
     <Page.Body className="md:h-auto md:w-[450px] w-full py-2 gap-2">
-      <Page.Header  title="Encontre sua Área" removeBack/>
+      <Page.Header  title="Busque a Área" removeBack/>
       <Filters onSearch={handleSearch}/>
       {
 

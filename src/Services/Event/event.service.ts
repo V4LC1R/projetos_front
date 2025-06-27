@@ -18,7 +18,11 @@ export default {
         const {data}:{data:Event[]} = await api.get(`${basePath}/my-events`);
         return data
     },
-    async delete(eventId:number):Promise<void>{
-        return await api.delete(`${basePath}/${eventId}`)
+    async ownerAreaDelete(eventId:number):Promise<void>{
+        return await api.delete(`${basePath}/owner-area/${eventId}`)
+    },
+
+    async guestDelete(eventId:number):Promise<void>{
+        return await api.delete(`${basePath}/guest/${eventId}`)
     },
 }

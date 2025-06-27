@@ -5,6 +5,7 @@ import { Event as EventComponents } from "@components/Event";
 import { Event } from "@services/Event";
 import eventService from "@services/Event/event.service";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaSearch } from "react-icons/fa";
 
 
@@ -16,12 +17,42 @@ export function EventsPage() {
 
     async function loadEvents(){
         const data = await eventService.byGuest();
-        setEvents(data);
+        setEvents(()=>data);
     }
 
     function handleDetails(event:Event){
         setEventOpened(()=>event)
         setOpenDetails(e=>!openDetails)
+    }
+
+    function ajustList(){
+            const updateEvents = [...events];
+            const indexProduct = updateEvents.findIndex(idItem=>idItem.id === eventOpened.id);
+           
+            if(indexProduct>=0)
+                updateEvents.splice(indexProduct,1);
+        
+            setEvents(updateEvents);
+        }
+
+    async function handleCancelEvent(){
+        
+        await  toast.promise(
+                eventService.guestDelete(eventOpened.id),
+                {
+                    loading: "Cancelando evento...",
+                    success: () => {
+                        ajustList();
+                        setOpenDetails(false);
+                        return "Evento cancelado com sucesso!";
+                    },
+                    error: () => {
+                        setOpenDetails(false);
+                        return "Erro ao cancelar evento, tente novamente mais tarde!";
+                    }
+                }
+            )
+       
     }
 
     useEffect(()=>{
@@ -35,7 +66,6 @@ export function EventsPage() {
                 className="w-[500px]"
                 isOpen={openDetails}
                 onRequestClose={()=> setOpenDetails(e=>!openDetails)}
-
             >
                 <div className="w-full h-full flex flex-col gap-1">
                     <header className="w-full">
@@ -46,12 +76,10 @@ export function EventsPage() {
                     <EventComponents.Detail event={eventOpened}/>
                    
                     <div className="w-full flex flex-row gap-2 justify-end">
-                        <Form.Button 
-                            className="bg-he-red-400 hover:bg-he-red-500 text-white"
-                        >
-                            Cancelar
+                        <Form.Button onClick={()=>handleCancelEvent()}>
+                            Cancelar Evento
                         </Form.Button>
-                    
+
                     </div>
                     
                 </div>
@@ -68,7 +96,7 @@ export function EventsPage() {
                         <Form.Button className="h-[42.5px]"><FaSearch/></Form.Button>
                     </div>
                 
-                    <Page.ScrollY className="md:h-[470px] h-[470px]">
+                    <Page.ScrollY className="h-[270px]">
                         {
                             events.map((r,i)=>(
                                 <div onClick={()=>handleDetails(r)} key={i}>
