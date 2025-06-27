@@ -3,7 +3,6 @@ import { Page } from "@components/__common/Page";
 import { useParams } from "react-router";
 import { FaArrowLeft } from "react-icons/fa";
 
-
 type SolicitationProps = {
   areaName: string;
   userName: string;
@@ -40,6 +39,16 @@ function SolicitationCard({
   );
 }
 
+// Função para calcular horário final (1h40min depois)
+function calcularHorarioFinal(horarioInicial: string): string {
+  const [hora, minuto] = horarioInicial.split(":").map(Number);
+  const totalMinutos = hora * 60 + minuto + 100; // 1h40min = 100 minutos
+  const horaFinal = Math.floor(totalMinutos / 60);
+  const minutoFinal = totalMinutos % 60;
+
+  const formatado = (num: number) => String(num).padStart(2, "0");
+  return `${formatado(horaFinal)}:${formatado(minutoFinal)}`;
+}
 
 export function AreaPage() {
   const { id } = useParams();
@@ -60,9 +69,7 @@ export function AreaPage() {
       <Page.Header title="Área X" />
 
       <Page.Main>
-
         {selectedHorario ? (
-          // Formulário de Reserva com layout melhorado
           <div className="p-4 border rounded-xl shadow-md bg-white w-full max-w-lg mx-auto mt-4 overflow-auto max-h-[500px]">
             <button
               onClick={() => setSelectedHorario(null)}
@@ -109,7 +116,7 @@ export function AreaPage() {
                 <label className="block text-base font-medium">Período</label>
                 <input
                   type="text"
-                  value={selectedHorario}
+                  value={`${selectedHorario} - ${calcularHorarioFinal(selectedHorario)}`}
                   readOnly
                   className="w-full mt-1 p-3 border rounded bg-gray-100 text-gray-900"
                 />
@@ -134,7 +141,6 @@ export function AreaPage() {
             </form>
           </div>
         ) : (
-          // Lista de horários
           <>
             <div className="w-full flex flex-row justify-start mb-2">
               <span className="text-lg font-semibold">Horários</span>
@@ -144,12 +150,17 @@ export function AreaPage() {
               {horariosDisponiveis.map((horario, index) => (
                 <div
                   key={index}
-                  className="p-4 bg-white rounded-xl shadow-sm border border-gray-200 flex justify-between items-center"
+                  className="p-4 bg-white rounded-[4px] hover:bg-gray-50 shadow-sm border border-gray-200 flex justify-between items-center"
                 >
-                  <span className="text-base text-gray-800">Horário: {horario}</span>
+                  <div className="flex flex-col text-base text-gray-800">
+                    <span>Início: {horario}</span>
+                    <span className="text-sm text-gray-500">
+                      Fim: {calcularHorarioFinal(horario)}
+                    </span>
+                  </div>
                   <button
                     onClick={() => setSelectedHorario(horario)}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+                    className="px-4 py-2 bg-green-600 cursor-pointer text-white rounded-lg hover:bg-green-700 transition duration-300"
                   >
                     Reservar
                   </button>
